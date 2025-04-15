@@ -3,7 +3,9 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.mapper.TravelMapper">
     <select id="getTravelPlansByUserId" resultType="org.example.entity.Travel">
-        SELECT * FROM travel_plan WHERE user_id = #{userId}
+        SELECT id, user_id as userId, plan_name as planName, travel_date as travelDate, itinerary
+        FROM travel_plan
+        WHERE user_id = #{userId}
     </select>
 
     <insert id="addTravelPlan" parameterType="org.example.entity.Travel">

@@ -22,6 +22,13 @@ axios.interceptors.request.use(config => {
 const vuetify = new Vuetify({
   theme: {
     dark: false,  // 这里是设置默认的主题，`false` 表示默认使用亮模式，`true` 则表示使用暗模式
+    primary: '#1976D2', // 确保这是蓝色
+    secondary: '#424242',
+    accent: '#82B1FF',
+    error: '#FF5252',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FFC107'
   },
 })
 

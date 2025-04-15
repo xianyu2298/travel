@@ -45,9 +45,18 @@
 
               <v-btn
                   type="submit"
-                  color="primary"
+                  color="blue"
+                  class="blue--text"
+                  style="background-color: cornflowerblue !important"
                   :loading="isSubmitting"
               >保存计划</v-btn>
+
+              <v-btn
+                  color="blue"
+                  style="background-color: cornflowerblue !important"
+                  @click="$router.push('/travelpage')"
+                  class="ml-2"
+              >返回</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -67,12 +76,12 @@
                   :key="index"
               >
                 <v-list-item-content>
-                  <v-list-item-title>{{ plan.planName }}</v-list-item-title>
+                  <v-list-item-title class="font-weight-bold">{{ plan.planName || '未命名计划' }}</v-list-item-title>
                   <v-list-item-subtitle>
-                    出行日期: {{ formatDate(plan.travelDate) }}
+                    出行日期: {{ plan.travelDate ? formatDate(plan.travelDate) : '未设置日期' }}
                   </v-list-item-subtitle>
                   <v-list-item-subtitle>
-                    行程安排: {{ plan.itinerary }}
+                    行程安排: {{ plan.itinerary || '无安排' }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -118,24 +127,31 @@ export default {
   methods: {
     formatDate(date) {
       if (!date) return '';
-      return new Date(date).toLocaleDateString();
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      return new Date(date).toLocaleDateString('zh-CN', options);
     },
     fetchTravelPlans() {
+      console.log('请求用户ID:', this.newPlan.userId);
       this.isLoading = true;
       this.$http.get('/travel/list', {
         params: { userId: this.newPlan.userId }
       }).then(response => {
+        console.log('响应数据:', JSON.stringify(response.data));
         if (response.data && response.data.meta && response.data.meta.status === 200) {
           this.travelPlans = response.data.data || [];
         } else {
           this.handleApiError(response);
         }
       }).catch(error => {
+        console.error('获取旅行计划错误:', error); // 添加错误日志
         this.handleNetworkError(error);
+      }).finally(() => {
+        this.isLoading = false;
       });
     },
     addTravelPlan() {
       this.isSubmitting = true;
+      console.log('提交的用户ID:', this.newPlan.userId); // 添加日志
       if (!this.newPlan.planName || !this.newPlan.travelDate || !this.newPlan.itinerary) {
         return this.$message.error('请填写完整信息');
       }

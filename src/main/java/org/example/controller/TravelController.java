@@ -23,11 +23,13 @@ public class TravelController {
 
         try {
             List<Travel> plans = travelMapper.getTravelPlansByUserId(userId);
+            System.out.println("查询结果示例：" + (plans.isEmpty() ? "空列表" : plans.get(0).toString()));
             meta.put("status", 200);
             meta.put("msg", "success");
             result.put("data", plans);
             result.put("meta", meta);
         } catch (Exception e) {
+            e.printStackTrace();
             meta.put("status", 500);
             meta.put("msg", "数据库错误");
             result.put("meta", meta);
@@ -35,6 +37,7 @@ public class TravelController {
 
         return result;
     }
+
 
     @PostMapping("/add")
     public Map<String, Object> addTravelPlan(@RequestBody Travel travel) {
