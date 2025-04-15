@@ -24,7 +24,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/login")
-    public ModelMap addBudget(@RequestBody Map<String,Object> param){
+    public ModelMap login(@RequestBody Map<String,Object> param){
         ModelMap result=new ModelMap();
         ModelMap meta=new ModelMap();
         if(param.get("username")!=null && param.get("password")!=null) {

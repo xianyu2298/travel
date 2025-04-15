@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" data-app>
 <!--    <img alt="Vue logo" src="./assets/logo.png">-->
     <router-view/>
   </div>

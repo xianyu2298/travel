@@ -73,17 +73,27 @@ export default {
     login () {
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
-        const { data: res } = await this.$http.post('user/login', this.loginForm)
-        console.log(res)
-        if (this.loginForm.validcode !== this.trueValidCode) {
-          return this.$message.error('验证码错误')
-        } else if (res.meta.status === 404) {
-          return this.$message.error('用户名或密码错误')
-        } else if (res.meta.status === 200 && this.loginForm.validcode === this.trueValidCode) {
-          this.$message.success('登录成功')
+        try {
+          const { data: res } = await this.$http.post('user/login', this.loginForm)
+
+          if (this.loginForm.validcode !== this.trueValidCode) {
+            return this.$message.error('验证码错误')
+          }
+
+          if (res.meta.status !== 200) {
+            return this.$message.error(res.meta.msg || '登录失败')
+          }
+
+          // 确保存储token和用户ID
           window.sessionStorage.setItem('token', res.data.token)
-          window.sessionStorage.setItem('userid', res.data.userid)
+          window.sessionStorage.setItem('userId', res.data.userid) // 统一使用userId
+          window.sessionStorage.setItem('username', res.data.username || '')
+
+          this.$message.success('登录成功')
           this.$router.push('/travel')
+        } catch (error) {
+          console.error('登录失败:', error)
+          this.$message.error('登录失败，请重试')
         }
       })
     }
