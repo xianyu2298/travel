@@ -36,6 +36,58 @@
                 ></v-date-picker>
               </v-menu>
 
+              <v-menu
+                  v-model="dateMenu"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+              ></v-menu>
+
+              <!-- 添加起始省份和城市选择 -->
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-select
+                      v-model="newPlan.startProvince"
+                      :items="provinces"
+                      label="起始省份"
+                      required
+                      @change="updateCities('start')"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-select
+                      v-model="newPlan.startCity"
+                      :items="startCities"
+                      label="起始城市"
+                      required
+                      :disabled="!newPlan.startProvince"
+                  ></v-select>
+                </v-col>
+              </v-row>
+
+              <!-- 添加目的省份和城市选择 -->
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-select
+                      v-model="newPlan.endProvince"
+                      :items="provinces"
+                      label="目的省份"
+                      required
+                      @change="updateCities('end')"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-select
+                      v-model="newPlan.endCity"
+                      :items="endCities"
+                      label="目的城市"
+                      required
+                      :disabled="!newPlan.endProvince"
+                  ></v-select>
+                </v-col>
+              </v-row>
+
               <v-textarea
                   v-model="newPlan.itinerary"
                   label="行程安排"
@@ -83,6 +135,10 @@
                   <v-list-item-subtitle>
                     行程安排: {{ plan.itinerary || '无安排' }}
                   </v-list-item-subtitle>
+                  <v-list-item-subtitle>
+                    行程路线: {{ plan.startProvince }}{{ plan.startCity }} → {{ plan.endProvince }}{{ plan.endCity }}
+                  </v-list-item-subtitle>
+
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -94,6 +150,7 @@
 </template>
 
 <script>
+import { provinces, cities } from '@/utils/chinaLocation';
 export default {
   data() {
     return {
@@ -101,12 +158,20 @@ export default {
         planName: '',
         travelDate: null,
         itinerary: '',
-        userId: null
+        userId: null,
+        startProvince: '',  // 新增：起始省份
+        startCity: '',      // 新增：起始城市
+        endProvince: '',    // 新增：目的省份
+        endCity: ''         // 新增：目的城市
+
       },
       travelPlans: [],
       dateMenu: false,
       isSubmitting: false,  // 添加提交状态
-      isLoading: false     // 添加加载状态
+      isLoading: false,
+      provinces: [],       // 所有省份
+      startCities: [],     // 起始城市列表
+      endCities: []        // 目的城市列表// 添加加载状态
     }
   },
   computed: {
@@ -115,6 +180,7 @@ export default {
     }
   },
   created() {
+    this.loadLocationData();
     const userId = window.sessionStorage.getItem('userId');
     if (userId) {
       this.newPlan.userId = parseInt(userId);
@@ -131,19 +197,19 @@ export default {
       return new Date(date).toLocaleDateString('zh-CN', options);
     },
     fetchTravelPlans() {
-      console.log('请求用户ID:', this.newPlan.userId);
       this.isLoading = true;
       this.$http.get('/travel/list', {
         params: { userId: this.newPlan.userId }
       }).then(response => {
-        console.log('响应数据:', JSON.stringify(response.data));
+        console.log('响应数据:', response.data); // 添加日志
         if (response.data && response.data.meta && response.data.meta.status === 200) {
           this.travelPlans = response.data.data || [];
+          console.log('设置的计划数据:', this.travelPlans); // 添加日志
         } else {
           this.handleApiError(response);
         }
       }).catch(error => {
-        console.error('获取旅行计划错误:', error); // 添加错误日志
+        console.error('获取旅行计划错误:', error);
         this.handleNetworkError(error);
       }).finally(() => {
         this.isLoading = false;
@@ -207,7 +273,24 @@ export default {
         this.$message.error('请求配置错误: ' + error.message);
       }
       console.error('请求错误详情:', error);
-    }
+    },
+    // 加载地理位置数据
+    loadLocationData() {
+      this.provinces = provinces; // 使用本地数据
+    },
+    updateCities(type) {
+      const province = type === 'start' ? this.newPlan.startProvince : this.newPlan.endProvince;
+      if (province) {
+        const cityList = cities[province] || []; // 使用本地数据
+        if (type === 'start') {
+          this.startCities = cityList;
+          this.newPlan.startCity = '';
+        } else {
+          this.endCities = cityList;
+          this.newPlan.endCity = '';
+        }
+      }
+    },
   }
 }
 </script>

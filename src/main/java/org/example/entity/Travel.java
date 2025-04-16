@@ -16,4 +16,10 @@ public class Travel {
     private String planName;
     private Date travelDate;
     private String itinerary;
+
+    // 新增字段
+    private String startProvince;
+    private String startCity;
+    private String endProvince;
+    private String endCity;
 }

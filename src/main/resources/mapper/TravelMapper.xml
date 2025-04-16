@@ -3,13 +3,20 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.mapper.TravelMapper">
     <select id="getTravelPlansByUserId" resultType="org.example.entity.Travel">
-        SELECT id, user_id as userId, plan_name as planName, travel_date as travelDate, itinerary
+        SELECT id, user_id as userId, plan_name as planName,
+               travel_date as travelDate, itinerary,
+               start_province as startProvince,
+               start_city as startCity,
+               end_province as endProvince,
+               end_city as endCity
         FROM travel_plan
         WHERE user_id = #{userId}
     </select>
 
     <insert id="addTravelPlan" parameterType="org.example.entity.Travel">
-        INSERT INTO travel_plan(user_id, plan_name, travel_date, itinerary)
-        VALUES(#{userId}, #{planName}, #{travelDate}, #{itinerary})
+        INSERT INTO travel_plan(user_id, plan_name, travel_date, itinerary,
+                                start_province, start_city, end_province, end_city)
+        VALUES(#{userId}, #{planName}, #{travelDate}, #{itinerary},
+               #{startProvince}, #{startCity}, #{endProvince}, #{endCity})
     </insert>
 </mapper>

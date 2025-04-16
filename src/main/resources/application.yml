@@ -16,3 +16,9 @@ mybatis:
 
 server:
   port: 8098
+
+# 在现有配置中添加
+weather:
+  api:
+    url: "https://api.heweather.net/s6/weather"
+    key: "2f5e688e80db4365b66b114b8f0f70b1"

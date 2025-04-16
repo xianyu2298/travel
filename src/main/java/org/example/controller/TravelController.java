@@ -34,7 +34,7 @@ public class TravelController {
             meta.put("msg", "数据库错误");
             result.put("meta", meta);
         }
-
+        System.out.println("返回的数据:" + result); // 添加日志
         return result;
     }
 
@@ -45,6 +45,15 @@ public class TravelController {
         Map<String, Object> meta = new HashMap<>();
 
         try {
+            // 添加字段验证
+            if (travel.getStartProvince() == null || travel.getStartCity() == null ||
+                    travel.getEndProvince() == null || travel.getEndCity() == null) {
+                meta.put("status", 400);
+                meta.put("msg", "请填写完整的起始地和目的地信息");
+                result.put("meta", meta);
+                return result;
+            }
+
             int rows = travelMapper.addTravelPlan(travel);
             if (rows > 0) {
                 meta.put("status", 200);

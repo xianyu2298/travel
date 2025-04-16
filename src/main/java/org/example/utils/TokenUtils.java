@@ -41,20 +41,4 @@ public class TokenUtils {
         }
         return token;
     }
-
-    public static boolean verifyToken(String token){
-        /**
-         * @desc   验证token，通过返回true
-         * @params [token]需要校验的串
-         **/
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
-            JWTVerifier verifier = JWT.require(algorithm).build();
-            DecodedJWT jwt = verifier.verify(token);
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return  false;
-        }
-    }
 }

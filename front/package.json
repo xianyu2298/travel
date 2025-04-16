@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^1.8.4",
+    "china-location": "^2.1.0",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.14",
     "vue": "^2.6.14",

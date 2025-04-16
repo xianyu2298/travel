@@ -69,10 +69,10 @@ export default {
       this.$router.push('/travel-plan');
     },
     checkWeather() {
-      alert("查询天气功能");
+      this.$router.push('/weather');
     },
     checkMoney() {
-      alert("查看记录功能");
+
     },
     logout() {
       // 清除本地存储的token和用户信息
