@@ -106,7 +106,7 @@
               <v-btn
                   color="blue"
                   style="background-color: cornflowerblue !important"
-                  @click="$router.push('/travelpage')"
+                  @click="$router.push('/travel')"
                   class="ml-2"
               >返回</v-btn>
             </v-form>
