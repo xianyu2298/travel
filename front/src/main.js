@@ -15,7 +15,10 @@ Vue.config.productionTip = false
 Vue.prototype.$http = axios
 axios.defaults.baseURL = 'http://localhost:8098/api/'
 axios.interceptors.request.use(config => {
-  config.headers.Authorization = window.sessionStorage.getItem('token')
+  // 排除weather路径的token验证
+  if (!config.url.includes('/weather')) {
+    config.headers.Authorization = window.sessionStorage.getItem('token')
+  }
   return config
 })
 

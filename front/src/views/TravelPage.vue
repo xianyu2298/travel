@@ -72,7 +72,7 @@ export default {
       this.$router.push('/weather');
     },
     checkMoney() {
-
+      this.$router.push({ name: 'MoneyPage' });
     },
     logout() {
       // 清除本地存储的token和用户信息

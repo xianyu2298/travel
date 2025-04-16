@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.ExpenseMapper">
+    <insert id="addExpense" parameterType="org.example.entity.Expense">
+        INSERT INTO expense(travel_plan_id, user_id, transportation, accommodation,
+                            dining, tickets, shopping, others, total)
+        VALUES(#{travelPlanId}, #{userId}, #{transportation}, #{accommodation},
+               #{dining}, #{tickets}, #{shopping}, #{others}, #{total})
+    </insert>
+
+    <select id="getExpensesByUserId" resultType="org.example.entity.Expense">
+        SELECT e.*, e.created_at as createdAt, tp.plan_name as planName
+        FROM expense e
+                 JOIN travel_plan tp ON e.travel_plan_id = tp.id
+        WHERE e.user_id = #{userId}
+    </select>
+</mapper>
