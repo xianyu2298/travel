@@ -1,4 +1,4 @@
-package org.example.impl;
+package org.example.Impl;
 
 import org.example.entity.Expense;
 import org.example.mapper.ExpenseMapper;
