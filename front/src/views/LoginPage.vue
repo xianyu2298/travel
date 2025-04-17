@@ -27,7 +27,7 @@
         <el-row>
           <el-form-item class="btns" >
             <!-- <span style="margin: 0 10px"></span> -->
-            <el-button type="info" @click="resetLoginForm">重置</el-button>
+            <el-button type="info" @click="$router.push('/register')">注册</el-button>
             <el-button type="primary" @click="login">登录</el-button>
           </el-form-item>
         </el-row>
@@ -107,7 +107,7 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  position: fixed;  /* 改为fixed确保覆盖整个视口 */
+
   width: 100%;
   height: 100vh;   /* 使用视口高度单位 */
   top: 0;

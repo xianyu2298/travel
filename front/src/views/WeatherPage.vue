@@ -1,6 +1,6 @@
 <template>
-  <div class="weather-container">
-    <div class="weather-card">
+  <div class="login_container">
+    <div class="">
       <h2 class="card-title">天气查询</h2>
       <div class="search-box">
         <el-row>
@@ -28,7 +28,7 @@
         </el-row>
       </div>
 
-      <div v-if="weatherData" class="weather-info">
+      <div v-if="weatherData" class="train-info">
         <div class="current-weather">
           <h3>{{ selectedCityName }} - {{ weatherData.weather1 }}</h3>
           <div class="temp">
@@ -150,21 +150,6 @@ export default {
 </script>
 
 <style scoped>
-.weather-container {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.weather-card {
-  width: 100%;
-  max-width: 800px;
-  background: #f7f7f7;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
 .card-title {
   text-align: center;
   font-size: 24px;
@@ -186,7 +171,7 @@ export default {
   padding: 10px;
 }
 
-.weather-info {
+.train-info {
   margin-top: 20px;
   background: #fff;
   padding: 15px;
@@ -230,5 +215,19 @@ export default {
 .return-button {
   text-align: center;
   margin-top: 20px;
+}
+
+.login_container {
+  background-image: url('../assets/img/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  padding: 20px;
 }
 </style>

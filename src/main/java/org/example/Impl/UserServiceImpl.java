@@ -21,4 +21,19 @@ public class UserServiceImpl implements UserService {
     public Integer login(User uer){
         return userMapper.login(uer);
     }
+
+    @Override
+    public boolean isExistByUsername(String username) {
+        return userMapper.isExistByUsername(username);
+    }
+
+    @Override
+    public boolean register(User user) {
+        try {
+            return userMapper.register(user) > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

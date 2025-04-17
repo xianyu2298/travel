@@ -7,6 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
+
 Vue.use(Vuetify)
 Vue.use(ElementUI)
 Vue.config.productionTip = false

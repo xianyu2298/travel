@@ -1,4 +1,6 @@
 <template>
+  <div class="login_container">
+    <div class="">
   <v-container>
     <v-row>
       <!-- 左侧：旅行计划列表 -->
@@ -134,6 +136,8 @@
       </v-col>
     </v-row>
   </v-container>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -263,7 +267,7 @@ export default {
   background-color: #f5f5f5;
 }
 
-.fenge .v-list-item {
+.fenge {
   border: 1px solid #eee;
   border-radius: 4px;
   margin-bottom: 8px;
@@ -279,25 +283,6 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-top: 16px;
-}
-
-
-.v-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 4px;
-}
-
-
-.v-btn[color="blue"] {
-  background-color: #007bff !important;
-  color: white;
-}
-
-
-.v-btn:disabled {
-  background-color: #d6d6d6;
-  color: #a0a0a0;
 }
 
 .login_container {

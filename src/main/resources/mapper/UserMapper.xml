@@ -9,4 +9,12 @@
     <select id="login" parameterType="org.example.entity.User" resultType="java.lang.Integer">
         select id from user where username = #{username} and password = #{password};
     </select>
+    <select id="isExistByUsername" parameterType="String" resultType="boolean">
+        SELECT COUNT(0) FROM user WHERE username = #{username}
+    </select>
+
+    <insert id="register" parameterType="org.example.entity.User">
+        INSERT INTO user(username, password) VALUES(#{username}, #{password})
+    </insert>
+
 </mapper>

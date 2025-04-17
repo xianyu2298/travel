@@ -1,4 +1,5 @@
 <template>
+  <div class="background">
   <v-container>
     <v-row>
       <v-col cols="12" md="6">
@@ -147,6 +148,7 @@
       </v-col>
     </v-row>
   </v-container>
+  </div>
 </template>
 
 <script>
@@ -297,6 +299,23 @@ export default {
 
 <style scoped>
 
+.background{
+  background-image: url('../assets/img/background.jpg');
+  background-size: cover;      /* 背景图像填充容器 */
+  background-position: center; /* 确保背景图居中 */
+  background-repeat: no-repeat;
+  position: fixed;  /* 改为 fixed 确保背景固定不动 */
+  width: 100%;       /* 宽度填充整个视口 */
+  height: 100vh;     /* 使用视口高度单位，确保背景高度填满屏幕 */
+  top: 0;
+  left: 0;
+  z-index: -1;       /* 确保背景图位于最底层 */
+  padding: 0;        /* 去除任何内边距 */
+  display: flex;
+  justify-content: center;  /* 横向居中 */
+  align-items: center;      /* 纵向居中 */
+}
+
 .expense-list .v-list-item {
   border: 1px solid #eee;
   border-radius: 4px;
@@ -307,4 +326,5 @@ export default {
 .expense-list .v-list-item:last-child {
   margin-bottom: 0;
 }
+
 </style>
