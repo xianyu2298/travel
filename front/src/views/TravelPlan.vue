@@ -97,15 +97,15 @@
 
               <v-btn
                   type="submit"
-                  color="blue"
+
                   class="blue--text"
-                  style="background-color: cornflowerblue !important"
+                  style="background-color: #ebeef1 !important"
                   :loading="isSubmitting"
               >保存计划</v-btn>
 
               <v-btn
-                  color="blue"
-                  style="background-color: cornflowerblue !important"
+
+                  style="background-color: #ebeef1 !important"
                   @click="$router.push('/travel')"
                   class="ml-2"
               >返回</v-btn>
@@ -122,7 +122,7 @@
                 v-if="isLoading"
                 indeterminate
             ></v-progress-linear>
-            <v-list v-else>
+            <v-list v-else class="expense-list">
               <v-list-item
                   v-for="(plan, index) in travelPlans"
                   :key="index"
@@ -295,3 +295,16 @@ export default {
 }
 </script>
 
+<style scoped>
+
+.expense-list .v-list-item {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  padding: 12px;
+}
+
+.expense-list .v-list-item:last-child {
+  margin-bottom: 0;
+}
+</style>

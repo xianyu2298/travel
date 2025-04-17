@@ -6,7 +6,7 @@
         <v-card>
           <v-card-title>我的旅行计划</v-card-title>
           <v-card-text>
-            <v-list>
+            <v-list class="fenge">
               <v-list-item
                   v-for="plan in travelPlans"
                   :key="plan.id"
@@ -85,14 +85,21 @@
                 </v-card-text>
               </v-card>
 
-              <v-btn
-                  type="submit"
-                  color="primary"
-                  class="mt-4"
-                  :disabled="!selectedPlan"
-              >
-                保存记录
-              </v-btn>
+              <div class="d-flex justify-space-between mt-6">
+                <v-btn
+                    color="blue"
+                    @click="$router.push('/travel')"
+                >
+                  返回
+                </v-btn>
+                <v-btn
+                    type="submit"
+                    color="blue"
+                    :disabled="!selectedPlan"
+                >
+                  保存记录
+                </v-btn>
+              </div>
             </v-form>
           </v-card-text>
         </v-card>
@@ -103,10 +110,11 @@
         <v-card>
           <v-card-title>我的开支记录</v-card-title>
           <v-card-text>
-            <v-list>
+            <v-list class="fenge">
               <v-list-item
                   v-for="record in expenseRecords"
                   :key="record.id"
+                  class="mb-2"
               >
                 <v-list-item-content>
                   <v-list-item-title>
@@ -253,5 +261,55 @@ export default {
 <style scoped>
 .selected-plan {
   background-color: #f5f5f5;
+}
+
+.fenge .v-list-item {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  padding: 12px;
+}
+
+.fenge .v-list-item:last-child {
+  margin-bottom: 0;
+}
+
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+
+.v-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+
+.v-btn[color="blue"] {
+  background-color: #007bff !important;
+  color: white;
+}
+
+
+.v-btn:disabled {
+  background-color: #d6d6d6;
+  color: #a0a0a0;
+}
+
+.login_container {
+  background-image: url('../assets/img/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: fixed;  /* 改为fixed确保覆盖整个视口 */
+  width: 100%;
+  height: 100vh;   /* 使用视口高度单位 */
+  top: 0;
+  left: 0;
+  z-index: -1;     /* 确保背景在底层 */
 }
 </style>
