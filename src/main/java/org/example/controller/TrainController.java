@@ -53,7 +53,7 @@ public class TrainController {
 
                 // 直接返回获取的原始响应
                 Map<String, Object> data = new HashMap<>();
-                data.put("response", response);  // 直接将原始的响应数据放入
+                data.put("response", response);  // 直接将原始响应数据放入
                 result.put("data", data);
             } else {
                 meta.put("status", 500);
