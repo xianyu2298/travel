@@ -17,7 +17,7 @@ mybatis:
 server:
   port: 8098
 
-# 在现有配置中添加
+# 天气API的ID与KEY
 weather:
   api:
     url: "https://cn.apihz.cn/api/tianqi/tqyb.php"

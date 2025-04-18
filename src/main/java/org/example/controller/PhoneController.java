@@ -14,7 +14,7 @@ public class PhoneController {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String API_KEY = "ed0cd46ea8864a8351ba1be384640042"; // 请替换为实际API Key
+    private static final String API_KEY = "ed0cd46ea8864a8351ba1be384640042"; // API Key
     private static final String API_URL = "http://apis.juhe.cn/mobile/get";
 
     @GetMapping("/query")

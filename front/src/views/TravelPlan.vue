@@ -203,10 +203,10 @@ export default {
       this.$http.get('/travel/list', {
         params: { userId: this.newPlan.userId }
       }).then(response => {
-        console.log('响应数据:', response.data); // 添加日志
+        console.log('响应数据:', response.data);
         if (response.data && response.data.meta && response.data.meta.status === 200) {
           this.travelPlans = response.data.data || [];
-          console.log('设置的计划数据:', this.travelPlans); // 添加日志
+          console.log('设置的计划数据:', this.travelPlans);
         } else {
           this.handleApiError(response);
         }
@@ -219,7 +219,7 @@ export default {
     },
     addTravelPlan() {
       this.isSubmitting = true;
-      console.log('提交的用户ID:', this.newPlan.userId); // 添加日志
+      console.log('提交的用户ID:', this.newPlan.userId);
       if (!this.newPlan.planName || !this.newPlan.travelDate || !this.newPlan.itinerary) {
         return this.$message.error('请填写完整信息');
       }
@@ -301,19 +301,19 @@ export default {
 
 .background{
   background-image: url('../assets/img/background.jpg');
-  background-size: cover;      /* 背景图像填充容器 */
-  background-position: center; /* 确保背景图居中 */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  position: fixed;  /* 改为 fixed 确保背景固定不动 */
-  width: 100%;       /* 宽度填充整个视口 */
-  height: 100vh;     /* 使用视口高度单位，确保背景高度填满屏幕 */
+  position: fixed;
+  width: 100%;
+  height: 100vh;
   top: 0;
   left: 0;
-  z-index: -1;       /* 确保背景图位于最底层 */
-  padding: 0;        /* 去除任何内边距 */
+  z-index: -1;
+  padding: 0;
   display: flex;
-  justify-content: center;  /* 横向居中 */
-  align-items: center;      /* 纵向居中 */
+  justify-content: center;
+  align-items: center;
 }
 
 .expense-list .v-list-item {
